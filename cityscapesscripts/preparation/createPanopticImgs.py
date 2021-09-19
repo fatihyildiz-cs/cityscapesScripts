@@ -47,7 +47,7 @@ def convert2panoptic(cityscapesPath=None, outputFolder=None, useTrainId=False, s
     for label in labels:
         if label.ignoreInEval:
             continue
-        categories.append({'id': int(label.categoryId) if useTrainId else int(label.id),
+        categories.append({'id': int(label.trainId) if useTrainId else int(label.id),
                            'name': label.name,
                            'color': label.color,
                            'supercategory': label.category,
@@ -109,7 +109,7 @@ def convert2panoptic(cityscapesPath=None, outputFolder=None, useTrainId=False, s
                     semanticId = segmentId // 1000
                     isCrowd = 0
                 labelInfo = id2label[semanticId]
-                categoryId = labelInfo.categoryId if useTrainId else labelInfo.id
+                categoryId = labelInfo.trainId if useTrainId else labelInfo.id
                 if labelInfo.ignoreInEval:
                     continue
                 if not labelInfo.hasInstances:
